@@ -17,7 +17,7 @@ const reviews: ReviewData[] = [
     text: 'We couldn’t be happier with the work Robert did converting our dining space into a master closet extension. He was professional, easy to work with, and made sure everything was done right the first time. The quality of the finish and craftsmanship exceeded our expectations. If you want it done right, Wright-Way Services is the way to go.',
     name: 'Brian L.',
     location: 'Mountain Rest, SC',
-    userImg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80',
+    userImg: 'https://raw.githubusercontent.com/NoLabelSecurity/Wright-Way/content/imgs/prof_pic.png',
     projectImg: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=150&h=150&q=80',
     projectTitle: 'Master Closet Extension'
   },

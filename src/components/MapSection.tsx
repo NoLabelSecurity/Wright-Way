@@ -5,28 +5,60 @@ interface LocationInfo {
   name: string;
   query: string;
   subtext: string;
+  countyName: string;
+  zoom: number;
 }
 
 const locations: LocationInfo[] = [
-  { name: 'Lexington', query: 'Lexington, SC', subtext: 'Primary Headquarters' },
-  { name: 'Columbia', query: 'Columbia, SC', subtext: 'Metro Area Coverage' },
-  { name: 'West Columbia', query: 'West Columbia, SC', subtext: 'Serving Cayce & West Metro' },
-  { name: 'Richland County', query: 'Richland County, SC', subtext: 'Inspections & Remodeling' },
-  { name: 'Batesburg-Leesville', query: 'Batesburg-Leesville, SC', subtext: 'Extended Coverage Area' }
+  { 
+    name: 'Lexington', 
+    query: 'Lexington County, SC', 
+    subtext: 'Primary Headquarters', 
+    countyName: 'Lexington County',
+    zoom: 10 
+  },
+  { 
+    name: 'Columbia', 
+    query: 'Richland County, SC', 
+    subtext: 'Metro Area Coverage', 
+    countyName: 'Richland County',
+    zoom: 10 
+  },
+  { 
+    name: 'West Columbia', 
+    query: 'Lexington County, SC', 
+    subtext: 'Serving Cayce & West Metro', 
+    countyName: 'Lexington County',
+    zoom: 10 
+  },
+  { 
+    name: 'Richland County', 
+    query: 'Richland County, SC', 
+    subtext: 'Inspections & Remodeling', 
+    countyName: 'Richland County',
+    zoom: 10 
+  },
+  { 
+    name: 'Batesburg-Leesville', 
+    query: 'Lexington County, SC', 
+    subtext: 'Extended Coverage Area', 
+    countyName: 'Lexington County',
+    zoom: 10 
+  }
 ];
 
 export const MapSection: React.FC = () => {
-  const [currentQuery, setCurrentQuery] = useState<string>('Lexington, SC');
+  const [selectedLoc, setSelectedLoc] = useState<LocationInfo>(locations[0]);
   const iframeContainerRef = useRef<HTMLDivElement>(null);
 
-  const focusMap = (query: string) => {
-    setCurrentQuery(query);
+  const focusMap = (loc: LocationInfo) => {
+    setSelectedLoc(loc);
     if (iframeContainerRef.current) {
       iframeContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
-  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(currentQuery)}&z=11&output=embed`;
+  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(selectedLoc.query)}&z=${selectedLoc.zoom}&output=embed`;
 
   return (
     <section id="coverage" className="bg-navy-light py-24 relative overflow-hidden">
@@ -48,7 +80,7 @@ export const MapSection: React.FC = () => {
             Lexington &amp; Greater Columbia Area
           </h2>
           <p className="text-gray-400 text-lg">
-            Click on any location below to highlight our service presence and center the interactive map on that community.
+            Click on any location below to center the interactive map and highlight the county service boundary.
           </p>
         </div>
 
@@ -58,16 +90,16 @@ export const MapSection: React.FC = () => {
             {locations.map((loc) => (
               <button
                 key={loc.name}
-                onClick={() => focusMap(loc.query)}
+                onClick={() => focusMap(loc)}
                 className={`w-full text-left border p-5 rounded-2xl transition-all duration-300 group flex items-center justify-between ${
-                  currentQuery === loc.query
+                  selectedLoc.name === loc.name
                     ? 'bg-brand-default/20 border-brand-default'
                     : 'bg-white/5 border-white/10 hover:bg-brand-default/10 hover:border-brand-default/40'
                 }`}
               >
                 <div className="flex items-center gap-4">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition ${
-                    currentQuery === loc.query
+                    selectedLoc.name === loc.name
                       ? 'bg-brand-default text-navy-default'
                       : 'bg-brand-default/10 text-brand-default group-hover:bg-brand-default group-hover:text-navy-default'
                   }`}>
@@ -79,7 +111,7 @@ export const MapSection: React.FC = () => {
                   </div>
                 </div>
                 <ChevronRight className={`w-5 h-5 transition ${
-                  currentQuery === loc.query ? 'text-brand-default' : 'text-gray-500 group-hover:text-brand-default'
+                  selectedLoc.name === loc.name ? 'text-brand-default' : 'text-gray-500 group-hover:text-brand-default'
                 }`} />
               </button>
             ))}
@@ -91,6 +123,12 @@ export const MapSection: React.FC = () => {
               ref={iframeContainerRef}
               className="relative w-full h-[350px] sm:h-[450px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-navy-default/50"
             >
+              {/* County Borderline Active Overlay */}
+              <div className="absolute top-4 left-4 z-20 bg-brand-default/95 text-navy-default backdrop-blur-sm text-xs font-black px-4 py-2.5 rounded-xl shadow-lg border border-brand-accent/20 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-navy-default animate-pulse" />
+                <span>Highlighting: {selectedLoc.countyName} Border</span>
+              </div>
+
               {/* Interactive map frame */}
               <iframe
                 id="map-iframe"
