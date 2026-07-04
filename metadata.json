@@ -1,0 +1,6 @@
+{
+  "name": "Wright Way Services LLC",
+  "description": "Professional home inspection and remodeling services in Lexington, SC. Licensed and insured, providing detailed digital reports and high-quality transformations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
