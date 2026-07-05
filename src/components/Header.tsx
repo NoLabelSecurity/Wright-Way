@@ -149,20 +149,16 @@ export const Header: React.FC = () => {
             <button
               onClick={() => {
                 handleShare();
-                // We don't automatically close the menu here, or we can close it if preferred. Let's close after a slight delay.
                 setTimeout(closeMobileMenu, 1000);
               }}
-              className={`w-full py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer flex items-center justify-between ${
+              className={`w-full py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                 copied
                   ? 'bg-brand-default/20 text-brand-default'
                   : 'text-white hover:bg-white/10'
               }`}
             >
-              <div className="flex items-center gap-2">
-                <Share2 className="w-4 h-4" />
-                <span>Share Website</span>
-              </div>
-              <span className="text-xs font-bold uppercase tracking-wider">{copied ? 'Copied!' : 'Share'}</span>
+              <Share2 className="w-4.5 h-4.5" />
+              <span>{copied ? 'COPIED!' : 'SHARE'}</span>
             </button>
 
             <a
