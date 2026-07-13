@@ -71,7 +71,7 @@ export const Header: React.FC = () => {
         boxShadow: (scrolled || mobileMenuOpen) ? '0 4px 20px rgba(0,0,0,0.25)' : 'none'
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-none lg:px-12 xl:px-20 px-4 sm:px-6">
         <div className="flex items-center justify-between h-24 sm:h-28">
           <a href="#hero" className="flex items-center gap-2 hover:opacity-95 transition-opacity">
             <img
@@ -149,16 +149,20 @@ export const Header: React.FC = () => {
             <button
               onClick={() => {
                 handleShare();
+                // We don't automatically close the menu here, or we can close it if preferred. Let's close after a slight delay.
                 setTimeout(closeMobileMenu, 1000);
               }}
-              className={`w-full py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+              className={`w-full py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer flex items-center justify-between ${
                 copied
                   ? 'bg-brand-default/20 text-brand-default'
                   : 'text-white hover:bg-white/10'
               }`}
             >
-              <Share2 className="w-4.5 h-4.5" />
-              <span>{copied ? 'COPIED!' : 'SHARE'}</span>
+              <div className="flex items-center gap-2">
+                <Share2 className="w-4 h-4" />
+                <span>Share Website</span>
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider">{copied ? 'Copied!' : 'Share'}</span>
             </button>
 
             <a

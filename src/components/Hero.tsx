@@ -36,7 +36,7 @@ export const Hero: React.FC = () => {
         <div className="absolute top-0 left-[70%] h-full measure-line-v" style={{ animationDelay: '1.2s' }}></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 sm:pt-40 sm:pb-28">
+      <div className="relative z-10 max-w-none lg:px-12 xl:px-20 px-4 sm:px-6 pt-32 pb-20 sm:pt-40 sm:pb-28">
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 bg-brand-default/10 border border-brand-default/30 rounded-full px-4 py-1.5 mb-6 reveal visible">
             <ShieldCheck className="w-4 h-4 text-brand-default" /> 

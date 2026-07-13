@@ -556,7 +556,7 @@ export const Gallery: React.FC = () => {
               <div
                 key={album.id}
                 onClick={() => openAlbum(album)}
-                className="group relative h-[180px] sm:h-[200px] rounded-2xl overflow-hidden border border-white/10 cursor-pointer transition-all duration-300 shadow-md hover:shadow-2xl hover:border-brand-default/40 hover:-translate-y-1 bg-navy-default/40"
+                className="group relative h-[225px] sm:h-[250px] rounded-2xl overflow-hidden border border-white/10 cursor-pointer transition-all duration-300 shadow-md hover:shadow-2xl hover:border-brand-default/40 hover:-translate-y-1 bg-navy-default/40"
               >
                 {/* Cover Image Background */}
                 <img

@@ -3,47 +3,41 @@ import { MapPin, ChevronRight } from 'lucide-react';
 
 interface LocationInfo {
   name: string;
-  query: string;
   subtext: string;
   countyName: string;
-  zoom: number;
+  embedUrl: string;
 }
 
 const locations: LocationInfo[] = [
   { 
     name: 'Lexington', 
-    query: 'Lexington County, SC', 
     subtext: 'Primary Headquarters', 
     countyName: 'Lexington County',
-    zoom: 10 
+    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-81.33230635!3d33.91421715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8eb0409c95191%3A0xc6cb1c738e4a9042!2sLexington%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
   },
   { 
     name: 'Columbia', 
-    query: 'Richland County, SC', 
     subtext: 'Metro Area Coverage', 
     countyName: 'Richland County',
-    zoom: 10 
+    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-80.9126279!3d34.0150937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8a379f8ee4a95%3A0x1b5708cbcf5c3fc8!2sRichland%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
   },
   { 
     name: 'West Columbia', 
-    query: 'Lexington County, SC', 
     subtext: 'Serving Cayce & West Metro', 
     countyName: 'Lexington County',
-    zoom: 10 
+    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-81.33230635!3d33.91421715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8eb0409c95191%3A0xc6cb1c738e4a9042!2sLexington%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
   },
   { 
     name: 'Richland County', 
-    query: 'Richland County, SC', 
     subtext: 'Inspections & Remodeling', 
     countyName: 'Richland County',
-    zoom: 10 
+    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-80.9126279!3d34.0150937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8a379f8ee4a95%3A0x1b5708cbcf5c3fc8!2sRichland%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
   },
   { 
     name: 'Batesburg-Leesville', 
-    query: 'Lexington County, SC', 
     subtext: 'Extended Coverage Area', 
     countyName: 'Lexington County',
-    zoom: 10 
+    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-81.33230635!3d33.91421715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8eb0409c95191%3A0xc6cb1c738e4a9042!2sLexington%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
   }
 ];
 
@@ -52,13 +46,17 @@ export const MapSection: React.FC = () => {
   const iframeContainerRef = useRef<HTMLDivElement>(null);
 
   const focusMap = (loc: LocationInfo) => {
+    // If the user has highlighted/selected text, do not change the map focus
+    const selection = window.getSelection()?.toString();
+    if (selection) return;
+
     setSelectedLoc(loc);
     if (iframeContainerRef.current) {
       iframeContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
-  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(selectedLoc.query)}&z=${selectedLoc.zoom}&output=embed`;
+  const mapUrl = selectedLoc.embedUrl;
 
   return (
     <section id="coverage" className="bg-navy-light py-24 relative overflow-hidden">
@@ -87,33 +85,63 @@ export const MapSection: React.FC = () => {
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           {/* Locations panel */}
           <div className="lg:col-span-4 space-y-4">
+            <span className="text-gray-400 text-xs font-semibold tracking-wider uppercase block mb-2 px-1">
+              Select an area to focus:
+            </span>
             {locations.map((loc) => (
-              <button
+              <div
+                role="button"
+                tabIndex={0}
                 key={loc.name}
                 onClick={() => focusMap(loc)}
-                className={`w-full text-left border p-5 rounded-2xl transition-all duration-300 group flex items-center justify-between ${
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    focusMap(loc);
+                  }
+                }}
+                className={`w-full text-left border p-5 rounded-2xl transition-all duration-300 group flex items-center justify-between cursor-pointer select-text hover:-translate-y-0.5 outline-none focus-visible:ring-2 focus-visible:ring-brand-default ${
                   selectedLoc.name === loc.name
-                    ? 'bg-brand-default/20 border-brand-default'
-                    : 'bg-white/5 border-white/10 hover:bg-brand-default/10 hover:border-brand-default/40'
+                    ? 'bg-brand-default/20 border-brand-default ring-2 ring-brand-default/30 shadow-lg shadow-brand-default/5'
+                    : 'bg-white/5 border-white/10 hover:bg-brand-default/10 hover:border-brand-default/30'
                 }`}
               >
-                <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition ${
+                <div className="flex items-center gap-4 select-text">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
                     selectedLoc.name === loc.name
-                      ? 'bg-brand-default text-navy-default'
+                      ? 'bg-brand-default text-navy-default scale-110'
                       : 'bg-brand-default/10 text-brand-default group-hover:bg-brand-default group-hover:text-navy-default'
                   }`}>
-                    <MapPin className="w-5 h-5" />
+                    <MapPin className={`w-5 h-5 ${selectedLoc.name === loc.name ? 'animate-bounce' : ''}`} />
                   </div>
-                  <div>
-                    <h4 className="text-white font-heading font-bold text-base leading-none">{loc.name}</h4>
-                    <span className="text-gray-400 text-xs mt-1 block">{loc.subtext}</span>
+                  <div className="select-text">
+                    <div className="flex items-center gap-2 select-text">
+                      <h4 className="text-white font-heading font-bold text-base leading-none select-text">
+                        {loc.name}{loc.name !== 'Richland County' ? ', SC' : ''}
+                      </h4>
+                      {loc.name === 'Lexington' && (
+                        <span className="bg-brand-default/10 text-brand-default border border-brand-default/25 text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider">
+                          HQ
+                        </span>
+                      )}
+                      {selectedLoc.name === loc.name && (
+                        <span className="bg-brand-default text-navy-default text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider animate-pulse">
+                          Active
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-gray-400 text-xs mt-1 block select-text">{loc.subtext}</span>
                   </div>
                 </div>
-                <ChevronRight className={`w-5 h-5 transition ${
-                  selectedLoc.name === loc.name ? 'text-brand-default' : 'text-gray-500 group-hover:text-brand-default'
-                }`} />
-              </button>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-1">
+                    {selectedLoc.name === loc.name ? 'Selected' : 'View Boundary'}
+                  </span>
+                  <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${
+                    selectedLoc.name === loc.name ? 'text-brand-default translate-x-1' : 'text-gray-500 group-hover:text-brand-default group-hover:translate-x-0.5'
+                  }`} />
+                </div>
+              </div>
             ))}
           </div>
 
@@ -126,11 +154,12 @@ export const MapSection: React.FC = () => {
               {/* County Borderline Active Overlay */}
               <div className="absolute top-4 left-4 z-20 bg-brand-default/95 text-navy-default backdrop-blur-sm text-xs font-black px-4 py-2.5 rounded-xl shadow-lg border border-brand-accent/20 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-navy-default animate-pulse" />
-                <span>Highlighting: {selectedLoc.countyName} Border</span>
+                <span>Showing: {selectedLoc.countyName} Boundary</span>
               </div>
 
               {/* Interactive map frame */}
               <iframe
+                key={selectedLoc.name}
                 id="map-iframe"
                 src={mapUrl}
                 width="100%"
