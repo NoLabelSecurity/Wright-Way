@@ -23,10 +23,10 @@ const reviews: ReviewData[] = [
   },
   {
     stars: 5,
-    text: 'Thorough inspection and incredibly detailed report. We found structural issues in the roof truss system we never would have caught on our own. Robert explained everything logically. Highly recommend Wright-Way!',
-    name: 'Sarah R.',
+    text: 'Nice work. Good people to have work done.',
+    name: 'Eddy Kirkland',
     location: 'Lexington, SC',
-    userImg: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80',
+    userImg: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%230f172a"/><circle cx="50" cy="38" r="18" fill="%2364748b"/><path d="M20 85 C20 66 33 58 50 58 C67 58 80 66 80 85 Z" fill="%2364748b"/></svg>',
     projectImg: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=150&h=150&q=80',
     projectTitle: 'Full Home Inspection'
   },

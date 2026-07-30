@@ -5,39 +5,51 @@ interface LocationInfo {
   name: string;
   subtext: string;
   countyName: string;
-  embedUrl: string;
+  lat: number;
+  lng: number;
+  zoom: number;
 }
 
 const locations: LocationInfo[] = [
   { 
-    name: 'Lexington', 
-    subtext: 'Primary Headquarters', 
+    name: 'Lexington, SC', 
+    subtext: 'Primary Headquarters • 33.9822° N, 81.2362° W', 
     countyName: 'Lexington County',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-81.33230635!3d33.91421715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8eb0409c95191%3A0xc6cb1c738e4a9042!2sLexington%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
+    lat: 33.9822,
+    lng: -81.2362,
+    zoom: 13
   },
   { 
-    name: 'Columbia', 
-    subtext: 'Metro Area Coverage', 
+    name: 'Columbia, SC', 
+    subtext: 'Metro Area Coverage • 34.0007° N, 81.0348° W', 
     countyName: 'Richland County',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-80.9126279!3d34.0150937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8a379f8ee4a95%3A0x1b5708cbcf5c3fc8!2sRichland%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
+    lat: 34.0007,
+    lng: -81.0348,
+    zoom: 12
   },
   { 
-    name: 'West Columbia', 
-    subtext: 'Serving Cayce & West Metro', 
+    name: 'West Columbia, SC', 
+    subtext: 'Serving Cayce & West Metro • 33.9935° N, 81.0739° W', 
     countyName: 'Lexington County',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-81.33230635!3d33.91421715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8eb0409c95191%3A0xc6cb1c738e4a9042!2sLexington%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
+    lat: 33.9935,
+    lng: -81.0739,
+    zoom: 13
   },
   { 
-    name: 'Richland County', 
-    subtext: 'Inspections & Remodeling', 
+    name: 'Richland County, SC (county center)', 
+    subtext: 'Inspections & Remodeling • 34.0370° N, 80.9066° W', 
     countyName: 'Richland County',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-80.9126279!3d34.0150937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8a379f8ee4a95%3A0x1b5708cbcf5c3fc8!2sRichland%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
+    lat: 34.0370,
+    lng: -80.9066,
+    zoom: 11
   },
   { 
-    name: 'Batesburg-Leesville', 
-    subtext: 'Extended Coverage Area', 
+    name: 'Batesburg-Leesville, SC', 
+    subtext: 'Extended Coverage Area • 33.9101° N, 81.5373° W', 
     countyName: 'Lexington County',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-81.33230635!3d33.91421715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8eb0409c95191%3A0xc6cb1c738e4a9042!2sLexington%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus'
+    lat: 33.9101,
+    lng: -81.5373,
+    zoom: 12
   }
 ];
 
@@ -56,7 +68,7 @@ export const MapSection: React.FC = () => {
     }
   };
 
-  const mapUrl = selectedLoc.embedUrl;
+  const mapUrl = `https://maps.google.com/maps?q=${selectedLoc.lat},${selectedLoc.lng}&z=${selectedLoc.zoom}&output=embed`;
 
   return (
     <section id="coverage" className="bg-navy-light py-24 relative overflow-hidden">
@@ -89,9 +101,8 @@ export const MapSection: React.FC = () => {
               Select an area to focus:
             </span>
             {locations.map((loc) => (
-              <div
-                role="button"
-                tabIndex={0}
+              <button
+                type="button"
                 key={loc.name}
                 onClick={() => focusMap(loc)}
                 onKeyDown={(e) => {
@@ -117,15 +128,15 @@ export const MapSection: React.FC = () => {
                   <div className="select-text">
                     <div className="flex items-center gap-2 select-text">
                       <h4 className="text-white font-heading font-bold text-base leading-none select-text">
-                        {loc.name}{loc.name !== 'Richland County' ? ', SC' : ''}
+                        {loc.name}
                       </h4>
-                      {loc.name === 'Lexington' && (
-                        <span className="bg-brand-default/10 text-brand-default border border-brand-default/25 text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider">
+                      {loc.name.startsWith('Lexington') && (
+                        <span className="bg-brand-default/10 text-brand-default border border-brand-default/25 text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider select-text">
                           HQ
                         </span>
                       )}
                       {selectedLoc.name === loc.name && (
-                        <span className="bg-brand-default text-navy-default text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider animate-pulse">
+                        <span className="bg-brand-default text-navy-default text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider animate-pulse select-text">
                           Active
                         </span>
                       )}
@@ -133,15 +144,15 @@ export const MapSection: React.FC = () => {
                     <span className="text-gray-400 text-xs mt-1 block select-text">{loc.subtext}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-1">
+                <div className="flex items-center gap-2 select-text">
+                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-1 select-text">
                     {selectedLoc.name === loc.name ? 'Selected' : 'View Boundary'}
                   </span>
                   <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${
                     selectedLoc.name === loc.name ? 'text-brand-default translate-x-1' : 'text-gray-500 group-hover:text-brand-default group-hover:translate-x-0.5'
                   }`} />
                 </div>
-              </div>
+              </button>
             ))}
           </div>
 
@@ -152,9 +163,9 @@ export const MapSection: React.FC = () => {
               className="relative w-full h-[350px] sm:h-[450px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-navy-default/50"
             >
               {/* County Borderline Active Overlay */}
-              <div className="absolute top-4 left-4 z-20 bg-brand-default/95 text-navy-default backdrop-blur-sm text-xs font-black px-4 py-2.5 rounded-xl shadow-lg border border-brand-accent/20 flex items-center gap-2">
+              <div className="absolute top-4 left-4 z-20 bg-brand-default/95 text-navy-default backdrop-blur-sm text-xs font-black px-4 py-2.5 rounded-xl shadow-lg border border-brand-accent/20 flex items-center gap-2 select-text">
                 <span className="w-2 h-2 rounded-full bg-navy-default animate-pulse" />
-                <span>Showing: {selectedLoc.countyName} Boundary</span>
+                <span className="select-text">Showing: {selectedLoc.countyName} Boundary</span>
               </div>
 
               {/* Interactive map frame */}
