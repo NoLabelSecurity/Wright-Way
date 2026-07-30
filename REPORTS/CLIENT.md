@@ -27,6 +27,7 @@
 
 ### Recently Completed
 
+- ✅ Removed "Specialized Testing" container from Comprehensive Home Services section in `Services.tsx` per request
 - ✅ Incorporated 50.0 hours of initial baseline development from prior deployment alongside 20.7 hours of current deployment polish (70.7 hours total development investment)
 - ✅ Re-aligned the 4 cards in "Why Homeowners Choose Wright-Way" section to place titles directly beside their icons and reduced container padding to lower overall card height
 - ✅ Converted service location containers in "Areas We Cover" into interactive buttons with active focus indicators, dynamic map centering on click, reduced button size, and expanded map canvas width (8 out of 12 columns)

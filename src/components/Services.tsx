@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Hammer, FlaskConical, Settings, Layout, ClipboardList, ShieldCheck, MapPin, Banknote, Sparkles, ArrowRight, X, CheckCircle2, Clock } from 'lucide-react';
+import { Search, Hammer, Settings, Layout, ClipboardList, ShieldCheck, MapPin, Banknote, Sparkles, ArrowRight, X, CheckCircle2, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ServiceCardData {
@@ -68,31 +68,6 @@ const services: ServiceCardData[] = [
       ],
       whyUs: 'Every remodel is managed with a licensed home inspector\'s attention to detail. This means we make sure the internal framing, waterproofing, and mechanicals are 100% correct before any finishes go up.',
       timeframe: 'Project durations range from 1 to 4 weeks depending on scope, with fixed milestones and clear daily updates.'
-    }
-  },
-  {
-    icon: <FlaskConical className="w-7 h-7 text-brand-default" />,
-    title: 'Specialized Testing',
-    desc: 'Protect your family with professional Radon and Mold testing. We provide accurate assessments and remediation guidance.',
-    bgImg: 'https://images.pexels.com/photos/9259994/pexels-photo-9259994.jpeg',
-    details: {
-      subtitle: 'Certified Radon, Mold & Moisture Diagnostics',
-      description: 'Protect your family\'s health from invisible environmental dangers. We utilize certified active measurement equipment and lab-analyzed testing to identify radon levels, mold spore counts, and hidden moisture leaks.',
-      features: [
-        'Continuous electronic Radon monitoring (48-hour active tests)',
-        'Indoor/outdoor comparative air sampling for mold spore counts',
-        'Non-invasive moisture mapping and wall-humidity scanning',
-        'Surface tape and swab sampling for physical mold confirmation',
-        'Comprehensive diagnostic laboratory reporting'
-      ],
-      process: [
-        'Deployment of specialized active testing instruments at the property',
-        'Secure collection and shipping of samples to certified analysis labs',
-        'Detailed breakdown of allergen and hazard density levels',
-        'Clear remediation recommendations and action plan presentation'
-      ],
-      whyUs: 'We are an independent inspection firm — we do not sell mold remediation services. This ensures absolute honesty and zero conflict of interest in your test results.',
-      timeframe: 'Radon tests require a minimum of 48 hours of active monitoring. Mold and air sample lab analyses are returned in 2 to 3 business days.'
     }
   },
   {
