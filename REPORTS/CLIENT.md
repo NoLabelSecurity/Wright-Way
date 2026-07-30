@@ -27,6 +27,7 @@
 
 ### Recently Completed
 
+- ✅ Configured social preview card image tags in `index.html` to NoLabelSecurity `Social-Preview_Wright-Way.png`
 - ✅ Updated second client review to Eddy Kirkland with custom testimonial ("Nice work. Good people to have work done.") and male avatar placeholder image
 - ✅ Created interactive Service Areas Map with selectable towns and county borders for Midlands, SC
 - ✅ Added +25% card height boost to Project Gallery cards for maximum visual presentation
