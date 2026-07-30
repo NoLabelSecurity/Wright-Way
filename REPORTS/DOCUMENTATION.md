@@ -70,33 +70,53 @@ DOM View Render
 ## Directory Tree
 
 ```text
-src/
-├── components/
-│   ├── About.tsx
-│   ├── BeforeAfterSlider.tsx
-│   ├── ContactForm.tsx
-│   ├── Footer.tsx
-│   ├── Gallery.tsx
-│   ├── Header.tsx
-│   ├── Hero.tsx
-│   ├── MapSection.tsx
-│   ├── Reviews.tsx
-│   └── Services.tsx
-├── App.tsx
-├── index.css
-├── main.tsx
-└── types.ts
+Wright-Way-Services-LLC/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   ├── About.tsx
+│   │   ├── BeforeAfterSlider.tsx
+│   │   ├── ContactForm.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Gallery.tsx
+│   │   ├── Header.tsx
+│   │   ├── Hero.tsx
+│   │   ├── MapSection.tsx
+│   │   ├── Reviews.tsx
+│   │   └── Services.tsx
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   └── types.ts
+├── REPORTS/
+│   ├── ANALYTICS.md
+│   ├── CLIENT.md
+│   ├── DEVELOPMENT.md
+│   ├── DOCUMENTATION.md
+│   ├── FEATURES.md
+│   ├── PROJECT.md
+│   ├── PROJECT_MEMORY.md
+│   ├── README.md
+│   └── REPORTING_GUIDELINES.md
+├── .env.example
+├── index.html
+├── metadata.json
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 ```
 
 ---
 
 ### Directory Purpose
 
-| Folder | Description |
-|----------|-------------|
-| components | Modular, decoupled UI components |
-| root (src) | App entry point, global styles, and TypeScript declarations |
-| REPORTS | Automated project documentation suite and maintenance guidelines |
+| Folder / File | Description |
+|---------------|-------------|
+| `src/components/` | Modular, decoupled UI components (Hero, Services, Gallery, Map, etc.) |
+| `src/` | App entry points (`main.tsx`, `App.tsx`), global styles (`index.css`), and shared types (`types.ts`) |
+| `REPORTS/` | Single source of truth documentation suite tracking development progress, technical specs, and analytics |
+| Root Configs | Build config (`vite.config.ts`), TypeScript rules (`tsconfig.json`), dependencies (`package.json`), and metadata (`metadata.json`) |
 
 </details>
 
@@ -191,7 +211,7 @@ ORM: N/A
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| GEMINI_API_KEY | ❌ (Optional) | Server-side Gemini API access if enabled |
+| API_KEY | ❌ (Optional) | Server-side AI API key for dynamic content service if enabled |
 
 ---
 
@@ -312,7 +332,7 @@ Unit Tests: N/A
 
 Integration Tests: N/A
 
-E2E Tests: Manual browser verification in AI Studio preview iframe
+E2E Tests: Manual browser verification in development container preview iframe
 
 Coverage: N/A
 

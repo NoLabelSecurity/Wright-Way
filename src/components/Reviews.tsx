@@ -9,6 +9,7 @@ interface ReviewData {
   userImg: string;
   projectImg: string;
   projectTitle: string;
+  verifiedTag?: string;
 }
 
 const reviews: ReviewData[] = [
@@ -28,43 +29,18 @@ const reviews: ReviewData[] = [
     location: 'Lexington, SC',
     userImg: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%230f172a"/><circle cx="50" cy="38" r="18" fill="%2364748b"/><path d="M20 85 C20 66 33 58 50 58 C67 58 80 66 80 85 Z" fill="%2364748b"/></svg>',
     projectImg: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=150&h=150&q=80',
-    projectTitle: 'Full Home Inspection'
+    projectTitle: 'Home Remodel',
+    verifiedTag: 'Facebook Review'
   },
   {
     stars: 5,
-    text: "Got our inspection report within 24 hours. Everything was clearly documented with digital high resolution photos. Best experience we've had with a home inspector in South Carolina.",
-    name: 'David T.',
+    text: "Thank you and we will enjoy it. Again thank you so much for making this for us...you did a Great Job on it...!!! Even our dogs loves it lol",
+    name: 'Chell Hoffman',
     location: 'West Columbia, SC',
-    userImg: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80',
-    projectImg: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=150&h=150&q=80',
-    projectTitle: 'Comprehensive Digital Report'
-  },
-  {
-    stars: 5,
-    text: 'Great bathroom renovation! Robert and his team were responsive, kept us updated throughout the entire remodeling layout, and cleaned up every single day. Will absolutely use again.',
-    name: 'Linda W.',
-    location: 'Batesburg-Leesville, SC',
-    userImg: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&h=100&q=80',
-    projectImg: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=150&h=150&q=80',
-    projectTitle: 'Modern Bathroom Remodel'
-  },
-  {
-    stars: 5,
-    text: 'Robert repaired our deck and screened porch. Outstanding workmanship, precise woodwork, and incredibly courteous service. Kept the project perfectly within our budget!',
-    name: 'Sarah M.',
-    location: 'Lexington, SC',
-    userImg: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=100&h=100&q=80',
+    userImg: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%230f172a"/><circle cx="50" cy="38" r="18" fill="%2364748b"/><path d="M20 85 C20 66 33 58 50 58 C67 58 80 66 80 85 Z" fill="%2364748b"/></svg>',
     projectImg: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=150&h=150&q=80',
-    projectTitle: 'Deck & Porch Restoration'
-  },
-  {
-    stars: 5,
-    text: 'We hired Wright-Way for both an inspection and later a full renovation. Seamless experience from start to finish. They truly do things the proper way. Our home feels brand new and the inspection saved us thousands in structural negotiations.',
-    name: 'Mike & Patricia H.',
-    location: 'Richland County, SC',
-    userImg: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80',
-    projectImg: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=150&h=150&q=80',
-    projectTitle: 'Dual Inspection & Renovation'
+    projectTitle: 'Deck Addition',
+    verifiedTag: 'Facebook Review'
   }
 ];
 
@@ -120,7 +96,7 @@ export const Reviews: React.FC = () => {
                   />
                   <div>
                     <span className="text-[10px] text-brand-default block font-semibold uppercase tracking-wider">
-                      Project Verified
+                      {rev.verifiedTag || 'Project Verified'}
                     </span>
                     <span className="text-white text-xs font-semibold leading-tight block">
                       {rev.projectTitle}

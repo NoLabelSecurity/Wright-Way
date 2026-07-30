@@ -31,7 +31,7 @@ const App: React.FC = () => {
       <Reviews />
 
       {/* CONTACT */}
-      <section id="contact-section" className="py-20 sm:py-28 w-full bg-navy-default relative overflow-hidden">
+      <section id="contact-section" className="py-12 sm:py-16 lg:py-20 w-full bg-navy-default relative overflow-hidden">
         <div className="absolute inset-0 blueprint-grid"></div>
         <div className="absolute top-0 right-0 w-1/3 h-full" style={{ background: 'linear-gradient(135deg,rgba(34,197,94,.05),transparent)' }}></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

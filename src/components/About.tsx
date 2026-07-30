@@ -1,5 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Award, ShieldCheck, UserCheck, FileText, BadgeCheck, Clock, Map, MapPin, Building, Home, CloudRain, Compass, Shuffle } from 'lucide-react';
+
+interface ServiceLocation {
+  id: string;
+  name: string;
+  subtext: string;
+  badge?: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+}
+
+const serviceLocations: ServiceLocation[] = [
+  {
+    id: 'lexington',
+    name: 'Lexington, SC',
+    subtext: 'Primary Headquarters',
+    badge: 'HQ',
+    lat: 33.9822,
+    lng: -81.2362,
+    zoom: 13
+  },
+  {
+    id: 'columbia',
+    name: 'Columbia, SC',
+    subtext: 'Metro Area Coverage',
+    lat: 34.0007,
+    lng: -81.0348,
+    zoom: 12
+  },
+  {
+    id: 'west-columbia',
+    name: 'West Columbia, SC',
+    subtext: 'Cayce & West Metro',
+    lat: 33.9935,
+    lng: -81.0739,
+    zoom: 13
+  },
+  {
+    id: 'irmo',
+    name: 'Irmo, SC',
+    subtext: 'Suburban & Lake Corridor',
+    lat: 34.0863,
+    lng: -81.1832,
+    zoom: 13
+  },
+  {
+    id: 'chapin',
+    name: 'Chapin, SC',
+    subtext: 'Lake Murray Region',
+    lat: 34.1673,
+    lng: -81.3484,
+    zoom: 13
+  },
+  {
+    id: 'richland',
+    name: 'Richland County',
+    subtext: 'Forest Acres & Blythewood',
+    lat: 34.0370,
+    lng: -80.9066,
+    zoom: 11
+  },
+  {
+    id: 'batesburg',
+    name: 'Batesburg-Leesville, SC',
+    subtext: 'Extended Coverage Area',
+    lat: 33.9101,
+    lng: -81.5373,
+    zoom: 12
+  }
+];
 
 interface AreaCardData {
   icon: React.ReactNode;
@@ -41,6 +111,10 @@ const areas: AreaCardData[] = [
 ];
 
 export const About: React.FC = () => {
+  const [selectedLoc, setSelectedLoc] = useState<ServiceLocation>(serviceLocations[0]);
+
+  const mapUrl = `https://maps.google.com/maps?q=${selectedLoc.lat},${selectedLoc.lng}&z=${selectedLoc.zoom}&output=embed`;
+
   return (
     <>
       {/* ABOUT ROBERT */}
@@ -172,59 +246,82 @@ export const About: React.FC = () => {
             </h2>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            {/* Map illustration */}
-            <div>
-              <div className="relative rounded-2xl overflow-hidden" style={{ minHeight: '380px' }}>
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            {/* Map Canvas (Increased Map Width: 8 out of 12 columns) */}
+            <div className="lg:col-span-8 order-2 lg:order-1">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-navy-default h-[380px] sm:h-[450px]">
+                {/* Active Location Focus Badge */}
+                <div className="absolute top-3 left-3 z-20 bg-navy-default/90 backdrop-blur-md text-white text-xs font-semibold px-3.5 py-2 rounded-xl border border-white/15 shadow-lg flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-brand-default animate-pulse" />
+                  <span>Focused on: <strong className="text-brand-default font-heading">{selectedLoc.name}</strong></span>
+                </div>
+
                 <iframe
+                  key={selectedLoc.id}
                   id="static-map-iframe"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105953.51860367323!2d-81.33230635!3d33.91421715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f8eb0409c95191%3A0xc6cb1c738e4a9042!2sLexington%20County%2C%20SC!5e0!3m2!1sen!2sus!4v1715812345678!5m2!1sen!2sus"
+                  src={mapUrl}
                   width="100%"
-                  height="380"
+                  height="100%"
                   style={{ border: 0 }}
                   loading="lazy"
-                  allowFullScreen
-                  title="Lexington County Service Map"
+                  allowFullScreen={false}
+                  title={`Map focused on ${selectedLoc.name}`}
+                  className="w-full h-full"
                 />
               </div>
             </div>
 
-            <div>
-              <h3 className="font-heading font-bold text-brand-default text-xl mb-4 text-center lg:text-left">
-                Areas We Cover
-              </h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 bg-navy-default/30 border border-white/10 rounded-xl p-4 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-brand-default/10 flex items-center justify-center">
-                    <MapPin className="w-4 h-4 text-brand-default" />
-                  </div>
-                  <span className="font-medium text-white">Lexington, SC</span>
-                  <span className="ml-auto text-xs text-brand-default bg-brand-default/20 px-2 py-1 rounded-full font-semibold">HQ</span>
-                </div>
-                <div className="flex items-center gap-3 bg-navy-default/30 border border-white/10 rounded-xl p-4 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-brand-default/10 flex items-center justify-center">
-                    <MapPin className="w-4 h-4 text-brand-default" />
-                  </div>
-                  <span className="font-medium text-white">Columbia, SC</span>
-                </div>
-                <div className="flex items-center gap-3 bg-navy-default/30 border border-white/10 rounded-xl p-4 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-brand-default/10 flex items-center justify-center">
-                    <MapPin className="w-4 h-4 text-brand-default" />
-                  </div>
-                  <span className="font-medium text-white">West Columbia, SC</span>
-                </div>
-                <div className="flex items-center gap-3 bg-navy-default/30 border border-white/10 rounded-xl p-4 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-brand-default/10 flex items-center justify-center">
-                    <MapPin className="w-4 h-4 text-brand-default" />
-                  </div>
-                  <span className="font-medium text-white">Richland County</span>
-                </div>
-                <div className="flex items-center gap-3 bg-navy-default/30 border border-white/10 rounded-xl p-4 shadow-sm">
-                  <div className="w-8 h-8 rounded-lg bg-brand-default/10 flex items-center justify-center">
-                    <MapPin className="w-4 h-4 text-brand-default" />
-                  </div>
-                  <span className="font-medium text-white">Batesburg-Leesville, SC</span>
-                </div>
+            {/* Areas We Cover: Reduced Button Size (4 out of 12 columns) */}
+            <div className="lg:col-span-4 order-1 lg:order-2">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-heading font-bold text-brand-default text-lg">
+                  Areas We Cover
+                </h3>
+                <span className="text-[10px] text-gray-400 uppercase tracking-wider font-medium">
+                  Click to center
+                </span>
+              </div>
+              <div className="space-y-2">
+                {serviceLocations.map((loc) => {
+                  const isSelected = selectedLoc.id === loc.id;
+                  return (
+                    <button
+                      type="button"
+                      key={loc.id}
+                      onClick={() => setSelectedLoc(loc)}
+                      className={`w-full text-left transition-all duration-200 rounded-xl p-2.5 sm:p-3 border flex items-center justify-between cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-brand-default ${
+                        isSelected
+                          ? 'bg-brand-default/20 border-brand-default text-white shadow-md ring-1 ring-brand-default/40'
+                          : 'bg-navy-default/40 border-white/10 text-gray-300 hover:bg-white/10 hover:border-brand-default/30 hover:text-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                          isSelected ? 'bg-brand-default text-navy-default font-bold' : 'bg-brand-default/10 text-brand-default'
+                        }`}>
+                          <MapPin className="w-3.5 h-3.5" />
+                        </div>
+                        <div className="truncate">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-semibold text-xs sm:text-sm truncate">{loc.name}</span>
+                            {loc.badge && (
+                              <span className="text-[9px] font-black bg-brand-default/20 text-brand-default border border-brand-default/30 px-1.5 py-0.2 rounded shrink-0">
+                                {loc.badge}
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-[11px] text-gray-400 block truncate">{loc.subtext}</span>
+                        </div>
+                      </div>
+
+                      <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md shrink-0 uppercase tracking-wider transition-all ml-2 ${
+                        isSelected ? 'bg-brand-default text-navy-default' : 'bg-white/5 text-gray-400'
+                      }`}>
+                        {isSelected ? 'Centered' : 'Select'}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>

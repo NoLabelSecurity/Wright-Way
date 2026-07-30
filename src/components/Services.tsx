@@ -6,6 +6,7 @@ interface ServiceCardData {
   icon: React.ReactNode;
   title: string;
   desc: string;
+  bgImg?: string;
   details: {
     subtitle: string;
     description: string;
@@ -21,6 +22,7 @@ const services: ServiceCardData[] = [
     icon: <Search className="w-7 h-7 text-brand-default" />,
     title: 'Home Inspections',
     desc: 'Thorough, licensed home inspections covering pre-purchase, pre-listing, and new construction with clear, detailed digital reports you can trust.',
+    bgImg: 'https://images.pexels.com/photos/6614824/pexels-photo-6614824.jpeg',
     details: {
       subtitle: 'State-Licensed Inspection & Expert Reporting',
       description: 'Our comprehensive, certified home inspections go deep under the surface to protect your biggest investment. Whether you are buying, selling, or building, we analyze the entire property from roof to foundation with an expert builder\'s eye.',
@@ -46,6 +48,7 @@ const services: ServiceCardData[] = [
     icon: <Hammer className="w-7 h-7 text-brand-default" />,
     title: 'Remodeling Services',
     desc: "Full kitchens, bathrooms, and complete renovations completed the Wright-Way from start to finish with an inspector's attention to detail.",
+    bgImg: 'https://images.pexels.com/photos/4030049/pexels-photo-4030049.jpeg',
     details: {
       subtitle: 'Premium Kitchens, Bathrooms & Full Renovations',
       description: 'Transform your living space with master-level carpentry, smart layout planning, and high-end finishes. We combine premium design aesthetics with structural integrity to deliver renovations that last a lifetime.',
@@ -71,6 +74,7 @@ const services: ServiceCardData[] = [
     icon: <FlaskConical className="w-7 h-7 text-brand-default" />,
     title: 'Specialized Testing',
     desc: 'Protect your family with professional Radon and Mold testing. We provide accurate assessments and remediation guidance.',
+    bgImg: 'https://images.pexels.com/photos/9259994/pexels-photo-9259994.jpeg',
     details: {
       subtitle: 'Certified Radon, Mold & Moisture Diagnostics',
       description: 'Protect your family\'s health from invisible environmental dangers. We utilize certified active measurement equipment and lab-analyzed testing to identify radon levels, mold spore counts, and hidden moisture leaks.',
@@ -95,6 +99,7 @@ const services: ServiceCardData[] = [
     icon: <Settings className="w-7 h-7 text-brand-default" />,
     title: 'Maintenance & Repair',
     desc: 'Dependable maintenance and repair services handled with precision—identifying issues properly and fixing them the Wright-Way.',
+    bgImg: 'https://images.pexels.com/photos/6790074/pexels-photo-6790074.jpeg',
     details: {
       subtitle: 'Structural Wood Rot & Precision Handyman Care',
       description: 'Prevent minor issues from turning into major structural disasters. From replacing structural wood rot to fixing siding, drywall, and deck components, we treat small repairs with extreme care and precision.',
@@ -120,6 +125,7 @@ const services: ServiceCardData[] = [
     icon: <Layout className="w-7 h-7 text-brand-default" />,
     title: 'Home Additions',
     desc: 'Expanding your living space with custom additions and extensions designed and built with quality craftsmanship and care.',
+    bgImg: 'https://raw.githubusercontent.com/NoLabelSecurity/Wright-Way-Services-LLC/content/img/exterior/close-in/1.jpg',
     details: {
       subtitle: 'Expanding Your Living Space Seamlessly',
       description: 'Whether you need a sunroom, a detached garage, a master suite extension, or a complete ADU, we handle every detail from soil-compaction and foundation pouring to structural framing and final roof flashing.',
@@ -145,6 +151,7 @@ const services: ServiceCardData[] = [
     icon: <ClipboardList className="w-7 h-7 text-brand-default" />,
     title: 'Consultation',
     desc: 'Expert advice for your home projects. We help you plan your next step correctly, avoiding costly mistakes from the start.',
+    bgImg: 'https://images.pexels.com/photos/7731400/pexels-photo-7731400.jpeg',
     details: {
       subtitle: 'Expert Contractor Oversight & Project Planning',
       description: 'Ensure your upcoming home projects run smoothly and correctly. We act as your unbiased advisor, reviewing contractor bids, checking other builders\' framing/rough-in phases, and planning structural DIY projects to avoid code violations.',
@@ -213,19 +220,30 @@ export const Services: React.FC = () => {
             {services.map((item, index) => (
               <div
                 key={index}
-                className="service-card bg-navy-default/30 border border-white/10 rounded-2xl p-6 hover:border-brand-default/30 hover:bg-navy-default/50 flex flex-col justify-between"
+                className="service-card group relative bg-navy-default border border-white/10 rounded-2xl p-6 hover:border-brand-default/40 flex flex-col justify-between overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
-                <div>
-                  <div className="w-14 h-14 rounded-xl bg-brand-default/10 flex items-center justify-center mb-5">
+                {item.bgImg && (
+                  <>
+                    <img
+                      src={item.bgImg}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-default/90 via-navy-default/50 to-navy-default/25 group-hover:via-navy-default/40 transition-colors pointer-events-none"></div>
+                  </>
+                )}
+                <div className="relative z-10">
+                  <div className="w-14 h-14 rounded-xl bg-brand-default/15 border border-brand-default/30 backdrop-blur-md flex items-center justify-center mb-5 shadow">
                     {item.icon}
                   </div>
                   <h3 className="font-heading font-bold text-white text-lg mb-2">{item.title}</h3>
-                  <p className="text-gray-400 text-sm mb-6 leading-relaxed">{item.desc}</p>
+                  <p className="text-gray-300 text-sm mb-6 leading-relaxed font-normal">{item.desc}</p>
                 </div>
-                <div>
+                <div className="relative z-10">
                   <button
                     onClick={() => setSelectedService(item)}
-                    className="text-brand-default font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition-all cursor-pointer bg-transparent border-none p-0 outline-none"
+                    className="text-brand-default font-semibold text-sm inline-flex items-center gap-1.5 hover:gap-2.5 transition-all cursor-pointer bg-transparent border-none p-0 outline-none hover:text-white"
                   >
                     Learn More <ArrowRight className="w-4 h-4" />
                   </button>
