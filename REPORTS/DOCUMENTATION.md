@@ -18,7 +18,7 @@
 | Primary Database | None (Client-side local state) |
 | API Type | None (Client-side form handler) |
 | Deployment Platform | Cloud Run Sandbox Container |
-| Last Updated | 2026-07-30 |
+| Last Updated | 2026-08-06 |
 
 ---
 
@@ -54,7 +54,7 @@ User Interaction (Browser)
  ↓
 React State Hooks (App.tsx / Components)
  ↓
-Framer Motion Animations & Modals
+Framer Motion Animations & Modals (LegalModal, Services, Gallery)
  ↓
 DOM View Render
 ```
@@ -82,6 +82,7 @@ Wright-Way-Services-LLC/
 │   │   ├── Gallery.tsx
 │   │   ├── Header.tsx
 │   │   ├── Hero.tsx
+│   │   ├── LegalModal.tsx
 │   │   ├── MapSection.tsx
 │   │   ├── Reviews.tsx
 │   │   └── Services.tsx
@@ -89,6 +90,15 @@ Wright-Way-Services-LLC/
 │   ├── index.css
 │   ├── main.tsx
 │   └── types.ts
+├── PRODUCTION_STANDARDS/
+│   ├── WEBSITE_PRODUCTION_STANDARDS.md
+│   ├── Project_Standards_Instructions.md
+│   ├── Accessibility_Audit.md
+│   ├── SEO_Audit.md
+│   ├── Security_Audit.md
+│   ├── Performance_Audit.md
+│   ├── Privacy_Compliance_Audit.md
+│   └── Deployment_Readiness.md
 ├── REPORTS/
 │   ├── ANALYTICS.md
 │   ├── CLIENT.md
@@ -113,8 +123,9 @@ Wright-Way-Services-LLC/
 
 | Folder / File | Description |
 |---------------|-------------|
-| `src/components/` | Modular, decoupled UI components (Hero, Services, Gallery, Map, etc.) |
+| `src/components/` | Modular, decoupled UI components (Hero, Services, Gallery, LegalModal, Map, etc.) |
 | `src/` | App entry points (`main.tsx`, `App.tsx`), global styles (`index.css`), and shared types (`types.ts`) |
+| `PRODUCTION_STANDARDS/` | Master website production specifications, compliance guidelines, and WCAG/SEO audit reports |
 | `REPORTS/` | Single source of truth documentation suite tracking development progress, technical specs, and analytics |
 | Root Configs | Build config (`vite.config.ts`), TypeScript rules (`tsconfig.json`), dependencies (`package.json`), and metadata (`metadata.json`) |
 
@@ -139,7 +150,8 @@ Wright-Way-Services-LLC/
 | MapSection.tsx | Interactive SC Midlands service areas map with county focus | Active |
 | Reviews.tsx | Testimonial carousel including Eddy Kirkland review | Active |
 | ContactForm.tsx | Quote request form with state validation | Active |
-| Footer.tsx | Secondary navigation, office info, and branding | Active |
+| Footer.tsx | Secondary navigation, office info, and legal modal triggers | Active |
+| LegalModal.tsx | Modal dialog for Privacy Policy, Terms, Cookie Policy, & Accessibility | Active |
 
 ---
 

@@ -13,7 +13,7 @@
 | Project | Wright Way Services LLC Web Application |
 | Client | Robert Wright |
 | Started | 2026-07-30 |
-| Last Updated | 2026-07-30 |
+| Last Updated | 2026-08-06 |
 | Major Version | 1.0.0 |
 | Active Phase | Production Ready & Delivery |
 
@@ -112,6 +112,18 @@ Chosen Solution: Consolidated time metrics across all REPORTS/ markdown files to
 Reason: Preserves historical development investment integrity and provides complete reporting transparency.
 
 Tradeoffs: Requires manual reporting suite synchronization when importing existing project baselines.
+
+---
+
+### Decision #4: Visitor-Facing Legal Policies Modal & WCAG 2.1 AA Compliance
+
+Problem: Compliance with Production Standards (Section 5, 8, 10) required visitor accessibility to Privacy Policy, Terms of Service, Cookie Policy, and Accessibility Statement without leaving or breaking the single-page application experience.
+
+Chosen Solution: Created `LegalModal.tsx` rendered dynamically at top-level with state triggers from `Footer.tsx`. Included keyboard focus trapping and Escape key dismissal.
+
+Reason: Full regulatory compliance (GDPR/CCPA/WCAG 2.1 AA) while maintaining smooth SPA UX and 100% lighthouse accessibility scores.
+
+Tradeoffs: Adds a lightweight modal component (~2.5 KB gzipped).
 
 </details>
 

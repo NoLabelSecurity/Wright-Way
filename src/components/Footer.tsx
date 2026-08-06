@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { LegalModal, LegalDocType } from './LegalModal';
 
 export const Footer: React.FC = () => {
+  const [activeDoc, setActiveDoc] = useState<LegalDocType>(null);
+
   return (
     <footer className="bg-navy-default w-full border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -62,19 +65,28 @@ export const Footer: React.FC = () => {
             </ul>
             <div className="flex justify-center sm:justify-start gap-3 mt-5">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Page"
                 className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:bg-brand-default hover:text-white transition"
               >
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Page"
                 className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:bg-brand-default hover:text-white transition"
               >
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter Page"
                 className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:bg-brand-default hover:text-white transition"
               >
                 <Twitter className="w-4 h-4" />
@@ -83,10 +95,41 @@ export const Footer: React.FC = () => {
           </div>
         </div>
         <div className="border-t border-white/10 mt-10 pt-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4">
-          <p className="text-gray-500 text-xs">© 2026 Wright-Way Services LLC. All rights reserved.</p>
-          <p className="text-gray-600 text-xs">Licensed Home Inspector • Lexington, South Carolina</p>
+          <div>
+            <p className="text-gray-500 text-xs">© 2026 Wright-Way Services LLC. All rights reserved.</p>
+            <p className="text-gray-600 text-xs mt-0.5">Licensed Home Inspector • Lexington, South Carolina</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-gray-400">
+            <button
+              onClick={() => setActiveDoc('privacy')}
+              className="hover:text-brand-default transition cursor-pointer underline-offset-4 hover:underline"
+            >
+              Privacy Policy
+            </button>
+            <button
+              onClick={() => setActiveDoc('terms')}
+              className="hover:text-brand-default transition cursor-pointer underline-offset-4 hover:underline"
+            >
+              Terms of Service
+            </button>
+            <button
+              onClick={() => setActiveDoc('cookie')}
+              className="hover:text-brand-default transition cursor-pointer underline-offset-4 hover:underline"
+            >
+              Cookie Policy
+            </button>
+            <button
+              onClick={() => setActiveDoc('accessibility')}
+              className="hover:text-brand-default transition cursor-pointer underline-offset-4 hover:underline"
+            >
+              Accessibility Statement
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* LEGAL POLICIES MODAL */}
+      <LegalModal docType={activeDoc} onClose={() => setActiveDoc(null)} />
     </footer>
   );
 };

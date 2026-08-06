@@ -409,48 +409,56 @@ export const Services: React.FC = () => {
             </div>
             
             {/* Bento/Grid Features */}
-            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4 sm:gap-5">
               {/* Card 1 */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
-                <div className="w-12 h-12 rounded-xl bg-brand-default/10 flex items-center justify-center mb-4">
-                  <ShieldCheck className="w-6 h-6 text-brand-default" />
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
+                <div className="flex items-center gap-3 mb-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-brand-default/10 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-brand-default" />
+                  </div>
+                  <h3 className="text-white font-bold text-base sm:text-lg leading-tight">Licensed &amp; Insured</h3>
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Licensed &amp; Insured</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                   Full peace of mind with 100% comprehensive general liability coverage. State licensed home inspector and certified framing builder.
                 </p>
               </div>
               
               {/* Card 2 */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
-                <div className="w-12 h-12 rounded-xl bg-brand-default/10 flex items-center justify-center mb-4">
-                  <MapPin className="w-6 h-6 text-brand-default" />
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
+                <div className="flex items-center gap-3 mb-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-brand-default/10 flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5 text-brand-default" />
+                  </div>
+                  <h3 className="text-white font-bold text-base sm:text-lg leading-tight">Locally Owned &amp; Run</h3>
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Locally Owned &amp; Run</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                   Born and operated right out of Lexington, SC. No corporate franchises or distant dispatchers — just professional, local service.
                 </p>
               </div>
               
               {/* Card 3 */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
-                <div className="w-12 h-12 rounded-xl bg-brand-default/10 flex items-center justify-center mb-4">
-                  <Banknote className="w-6 h-6 text-brand-default" />
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
+                <div className="flex items-center gap-3 mb-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-brand-default/10 flex items-center justify-center shrink-0">
+                    <Banknote className="w-5 h-5 text-brand-default" />
+                  </div>
+                  <h3 className="text-white font-bold text-base sm:text-lg leading-tight">Transparent Pricing</h3>
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Transparent Pricing</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                   Detailed, easy-to-read electronic quotes. We explain every cost item clearly upfront so you can make informed home decisions.
                 </p>
               </div>
               
               {/* Card 4 */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
-                <div className="w-12 h-12 rounded-xl bg-brand-default/10 flex items-center justify-center mb-4">
-                  <Sparkles className="w-6 h-6 text-brand-default" />
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 hover:border-brand-default/30 hover:bg-navy-default/40 transition duration-300">
+                <div className="flex items-center gap-3 mb-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-brand-default/10 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-5 h-5 text-brand-default" />
+                  </div>
+                  <h3 className="text-white font-bold text-base sm:text-lg leading-tight">Satisfaction Guaranteed</h3>
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Satisfaction Guaranteed</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Robert stands by every single report item and construction finish details. We aren\'t finished until the job is done your way.
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                  Robert stands by every single report item and construction finish details. We aren't finished until the job is done your way.
                 </p>
               </div>
             </div>
